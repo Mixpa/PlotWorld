@@ -1,0 +1,12 @@
+#roadLength、lotLength代表的是世界中道路（road）和非道路（plot）区块的宽度
+# 它们的宽度必须为整数 单位是区块
+roadLength: 1
+plotLength: 2
+worldHeight: 64
+cantBuildInRoad: '&a[服务器]&7这里是道路哦！'
+cantClaimInRoad: '&a[服务器]&7禁止占领含有道路的区块哦！'
+#下面这项是关于世界中非道路区块（plot）的设置
+#格式为  [plot的名字]: [总占比 ]
+#所有plot生成的概率加起来必须等于100 否则会引起报错哦！
+plotConfig:
+  default: 100

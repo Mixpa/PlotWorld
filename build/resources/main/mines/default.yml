@@ -1,0 +1,10 @@
+Mine:
+  ==: Mixpa.qq514518274.chunkdate.Mine
+  #代表Mine的名字 要和文件名字一致哦！
+  name: default
+  #下面的配置项是Mine中的方块占比
+  #左边的配置代表你想使用的方块 方块的名字请先查看同目录的Material.html文件
+  #右边的数字就是方块的占比率 总和必须等于100！ 不然会报错！
+  blockComposition:
+    STONE: 50
+    GRASS: 50
