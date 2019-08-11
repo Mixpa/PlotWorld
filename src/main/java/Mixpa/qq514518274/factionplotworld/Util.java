@@ -5,13 +5,8 @@ import org.bukkit.Chunk;
 import org.bukkit.block.Block;
 
 public class Util {
-    private static int roadLength;
-    private static int addLength;
-
-    Util() {
-        roadLength = Config.getRoadLength();
-        addLength = roadLength + Config.getPlotLength();
-    }
+    private static int roadLength = Config.getRoadLength();
+    private static int addLength = Config.getRoadLength()+Config.getPlotLength();
 
     static boolean isRoad(int x, int z) {
         if (x == 0 || z == 0)

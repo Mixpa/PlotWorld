@@ -18,10 +18,12 @@ import java.io.IOException;
  *
  * @author Mixpa
  */
+
 @SuppressWarnings("unused")
 public class FactionPlotWorld extends JavaPlugin {
     @Override
     public void onEnable() {
+        //load config.yml
         //config.yml的加载
         File config = new File(getDataFolder(), "config.yml");
         if (!config.exists())
@@ -31,11 +33,14 @@ public class FactionPlotWorld extends JavaPlugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //load Mine's config
         //对Mine的设置进行加载
         ConfigurationSerialization.registerClass(Mine.class);
         MineConfig.loadMineConfig(this);
+        //init Util
         //初始化Util工具类
         new Util();
+        //register Event's
         //监听类加载
         getServer().getPluginManager().registerEvents(new RoadListener(), this);
         whenLegacyFactionsEnable();

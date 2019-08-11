@@ -79,8 +79,8 @@ public class Mine implements ConfigurationSerializable, WorldChunk {
     public Map<String, Object> serialize() {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("name", name);
-        LinkedHashMap<String, Double> blockMap = new LinkedHashMap<>();
-        Double chance = 0D;
+        LinkedHashMap<String, Integer> blockMap = new LinkedHashMap<>();
+        int chance = 0;
         for (Map.Entry<Material, Integer> entry : blockComposition.entrySet()) {
             blockMap.put(entry.getKey().toString(), entry.getValue() - chance);
             chance = chance + entry.getValue();
