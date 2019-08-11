@@ -1,8 +1,8 @@
-package Mixpa.qq514518274.factionplotworld.listener;
+package Mixpa.qq514518274.listener;
 
-import Mixpa.qq514518274.factionplotworld.config.Config;
-import Mixpa.qq514518274.factionplotworld.Util;
-import Mixpa.qq514518274.factionplotworld.WorldGenerator;
+import Mixpa.qq514518274.config.Config;
+import Mixpa.qq514518274.Util;
+import Mixpa.qq514518274.WorldGenerator;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.Cancellable;

@@ -1,6 +1,6 @@
-package Mixpa.qq514518274.factionplotworld;
+package Mixpa.qq514518274;
 
-import Mixpa.qq514518274.factionplotworld.config.Config;
+import Mixpa.qq514518274.config.Config;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;

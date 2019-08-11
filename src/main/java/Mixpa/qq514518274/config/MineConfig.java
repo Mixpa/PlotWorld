@@ -1,6 +1,7 @@
-package Mixpa.qq514518274.factionplotworld.config;
+package Mixpa.qq514518274.config;
 
-import Mixpa.qq514518274.factionplotworld.chunkdate.Mine;
+import Mixpa.qq514518274.chunkdate.Mine;
+import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
@@ -9,6 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MineConfig {
+    @Getter
     private static LinkedHashMap<Mine, Integer> mineComposition;
 
     public static void loadMineConfig(Plugin plugin) {
@@ -45,7 +47,4 @@ public class MineConfig {
         }
     }
 
-    public static LinkedHashMap<Mine, Integer> getMineComposition() {
-        return mineComposition;
-    }
 }

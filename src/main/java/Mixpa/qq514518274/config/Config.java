@@ -1,5 +1,6 @@
-package Mixpa.qq514518274.factionplotworld.config;
+package Mixpa.qq514518274.config;
 
+import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -10,11 +11,17 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Config {
+    @Getter
     private static int roadLength = 1;
+    @Getter
     private static int plotLength = 2;
+    @Getter
     private static int worldHeight = 64;
+    @Getter
     private static String cantBuildInRoad = ChatColor.translateAlternateColorCodes('&', "&a[服务器]&7这里是道路哦！");
+    @Getter
     private static String cantClaimInRoad = ChatColor.translateAlternateColorCodes('&', "&a[服务器]&7禁止占领含有道路的区块哦！");
+    @Getter
     private static LinkedHashMap<String, Integer> mineComposition;
 
     public Config(Plugin plugin) throws IOException {
@@ -88,30 +95,6 @@ public class Config {
         writer.write("plotConfig:");
         writer.newLine();
         writer.write("  default: 100");
-    }
-
-    public static LinkedHashMap<String, Integer> getMineComposition() {
-        return mineComposition;
-    }
-
-    public static int getPlotLength() {
-        return plotLength;
-    }
-
-    public static int getRoadLength() {
-        return roadLength;
-    }
-
-    public static int getWorldHeight() {
-        return worldHeight;
-    }
-
-    public static String getCantBuildInRoad() {
-        return cantBuildInRoad;
-    }
-
-    public static String getCantClaimInRoad() {
-        return cantClaimInRoad;
     }
 
 }

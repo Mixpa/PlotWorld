@@ -1,4 +1,4 @@
-package Mixpa.qq514518274.factionplotworld.chunkdate;
+package Mixpa.qq514518274.chunkdate;
 
 import org.bukkit.generator.ChunkGenerator;
 

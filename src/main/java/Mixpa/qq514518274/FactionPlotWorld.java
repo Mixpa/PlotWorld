@@ -1,11 +1,10 @@
-package Mixpa.qq514518274.factionplotworld;
+package Mixpa.qq514518274;
 
-import Mixpa.qq514518274.factionplotworld.chunkdate.Mine;
-import Mixpa.qq514518274.factionplotworld.config.Config;
-import Mixpa.qq514518274.factionplotworld.config.MineConfig;
-import Mixpa.qq514518274.factionplotworld.listener.FactionListener;
-import Mixpa.qq514518274.factionplotworld.listener.RoadListener;
-import org.bukkit.Bukkit;
+import Mixpa.qq514518274.chunkdate.Mine;
+import Mixpa.qq514518274.config.MineConfig;
+import Mixpa.qq514518274.config.Config;
+import Mixpa.qq514518274.listener.PluginListener;
+import Mixpa.qq514518274.listener.RoadListener;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -52,8 +51,6 @@ public class FactionPlotWorld extends JavaPlugin {
     }
 
     private void whenLegacyFactionsEnable() {
-        if (Bukkit.getPluginManager().isPluginEnabled("LegacyFactions")) {
-            getServer().getPluginManager().registerEvents(new FactionListener(), this);
-        }
+        getServer().getPluginManager().registerEvents(new PluginListener(this), this);
     }
 }
