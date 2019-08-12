@@ -16,8 +16,10 @@ public class Config {
     @Getter
     private static int plotLength = 2;
     @Getter
+    private static int addLength = 3;
+    @Getter
     private static int worldHeight = 64;
-    private static int cooldowns = 0;
+    private static int coolDowns = 0;
     @Getter
     private static String cantBuildInRoad = ChatColor.translateAlternateColorCodes('&', "&a[服务器]&7这里是道路哦！");
     @Getter
@@ -35,6 +37,7 @@ public class Config {
         if (config.contains("plotLength"))
             plotLength = config.getInt("plotLength");
         else writePlotLength(writer);
+        addLength = roadLength + plotLength;
         if (config.contains("worldHeight"))
             worldHeight = config.getInt("worldHeight");
         else writeWorldHeight(writer);
@@ -52,8 +55,8 @@ public class Config {
         } else {
             writePlotConfig(writer);
         }
-        if (config.contains("cooldowns"))
-            cooldowns = config.getInt("cooldowns", 0);
+        if (config.contains("coolDowns"))
+            coolDowns = config.getInt("coolDowns", 0);
         writer.close();
     }
 
@@ -104,7 +107,7 @@ public class Config {
         return mineComposition;
     }
 
-    public static int getCooldowns() {
-        return cooldowns;
+    public static int getCoolDowns() {
+        return coolDowns;
     }
 }

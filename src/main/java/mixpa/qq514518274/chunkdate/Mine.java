@@ -42,9 +42,11 @@ public class Mine implements ConfigurationSerializable, WorldChunk {
 
         return chunkData;
     }
-    public void reset(Chunk chunk){
+
+    public void reset(Chunk chunk) {
         resetMine(chunk);
     }
+
     private void resetMine(Object object) {
         if (!(object instanceof Chunk || object instanceof ChunkGenerator.ChunkData))
             throw new IllegalArgumentException("type must be Chunk or ChunkDate!");

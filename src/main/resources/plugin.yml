@@ -1,6 +1,6 @@
 name: FactionPlotWorld
 main: mixpa.qq514518274.FactionPlotWorld
-version: 1.0.0
+version: 1.1.0
 description: A simple Plot Faction world generator.
 softdepend: [LegacyFactions]
 load: STARTUP

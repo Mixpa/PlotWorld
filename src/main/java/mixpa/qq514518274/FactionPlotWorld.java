@@ -1,7 +1,7 @@
 package mixpa.qq514518274;
 
-import mixpa.qq514518274.command.PlotCommand;
 import mixpa.qq514518274.chunkdate.Mine;
+import mixpa.qq514518274.command.PlotCommand;
 import mixpa.qq514518274.config.Config;
 import mixpa.qq514518274.config.MineConfig;
 import mixpa.qq514518274.listener.PluginListener;

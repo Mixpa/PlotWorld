@@ -10,4 +10,4 @@ cantClaimInRoad: '&a[服务器]&7禁止占领含有道路的区块哦！'
 #所有plot生成的概率加起来必须等于100 否则会引起报错哦！
 plotConfig:
   default: 100
-cooldowns: 3600
+coolDowns: 3600

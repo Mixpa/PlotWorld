@@ -7,20 +7,20 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class Util {
-    private static int roadLength;
-    private static int addLength;
+    private static int roadLength = 1;
+    private static int addLength = 3;
 
     Util() {
         roadLength = Config.getRoadLength();
         addLength = Config.getPlotLength() + Config.getRoadLength();
     }
 
-    static boolean isRoad(int x, int z) {
-        if (x == 0 || z == 0)
+    public static boolean isRoad(int chunkX, int chunkZ) {
+        if (chunkX == 0 || chunkZ == 0)
             return true;
-        if (Math.abs(x) % addLength <= roadLength - 1)
+        if (Math.abs(chunkX) % addLength <= roadLength - 1)
             return true;
-        else return Math.abs(z) % addLength <= roadLength - 1;
+        else return Math.abs(chunkZ) % addLength <= roadLength - 1;
     }
 
     public static boolean isRoad(Chunk chunk) {

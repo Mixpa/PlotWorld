@@ -11,6 +11,30 @@ import java.util.Random;
 class RoadPopulator extends BlockPopulator {
     private final static int addLength = Config.getPlotLength() + Config.getRoadLength();
 
+    private static void setZBrickX15(Chunk chunk) {
+        for (int z = 15; z >= 0; z--) {
+            chunk.getBlock(15, Config.getWorldHeight() + 1, z).setType(Material.WOOD_STEP);
+        }
+    }
+
+    private static void setZBrickX0(Chunk chunk) {
+        for (int z = 15; z >= 0; z--) {
+            chunk.getBlock(0, Config.getWorldHeight() + 1, z).setType(Material.WOOD_STEP);
+        }
+    }
+
+    private static void setXBrickZ15(Chunk chunk) {
+        for (int x = 15; x >= 0; x--) {
+            chunk.getBlock(x, Config.getWorldHeight() + 1, 15).setType(Material.WOOD_STEP);
+        }
+    }
+
+    private static void setXBrickZ0(Chunk chunk) {
+        for (int x = 15; x >= 0; x--) {
+            chunk.getBlock(x, Config.getWorldHeight() + 1, 0).setType(Material.WOOD_STEP);
+        }
+    }
+
     @Override
     public void populate(World world, Random random, Chunk chunk) {
         int x = chunk.getX();
@@ -36,30 +60,6 @@ class RoadPopulator extends BlockPopulator {
                 chunk.getBlock(0, Config.getWorldHeight() + 1, 0).setType(Material.WOOD_STEP);
             if (!Util.isRoad(x - 1, z + 1))
                 chunk.getBlock(0, Config.getWorldHeight() + 1, 15).setType(Material.WOOD_STEP);
-        }
-    }
-
-    private static void setZBrickX15(Chunk chunk) {
-        for (int z = 15; z >= 0; z--) {
-            chunk.getBlock(15, Config.getWorldHeight() + 1, z).setType(Material.WOOD_STEP);
-        }
-    }
-
-    private static void setZBrickX0(Chunk chunk) {
-        for (int z = 15; z >= 0; z--) {
-            chunk.getBlock(0, Config.getWorldHeight() + 1, z).setType(Material.WOOD_STEP);
-        }
-    }
-
-    private static void setXBrickZ15(Chunk chunk) {
-        for (int x = 15; x >= 0; x--) {
-            chunk.getBlock(x, Config.getWorldHeight() + 1, 15).setType(Material.WOOD_STEP);
-        }
-    }
-
-    private static void setXBrickZ0(Chunk chunk) {
-        for (int x = 15; x >= 0; x--) {
-            chunk.getBlock(x, Config.getWorldHeight() + 1, 0).setType(Material.WOOD_STEP);
         }
     }
 }

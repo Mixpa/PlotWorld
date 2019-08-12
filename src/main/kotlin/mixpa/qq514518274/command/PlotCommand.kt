@@ -1,6 +1,7 @@
 package mixpa.qq514518274.command
 
 import mixpa.qq514518274.Util
+import mixpa.qq514518274.chunkdate.MineArea
 import mixpa.qq514518274.config.Config
 import mixpa.qq514518274.config.MineConfig
 import org.bukkit.command.Command
@@ -45,13 +46,17 @@ class PlotCommand : CommandExecutor {
         }
         //如果有匹配的Mine
         if (MineConfig.getMineNameMap().containsKey(name)) {
+            if (sender.isOp) {
+                MineArea(chunk.x, chunk.z, sender.world).resetMineArea(MineConfig.getMineNameMap()[name])
+                return
+            }
             //如果玩家使用过这个指令
             if (time.containsKey(sender)) {
-                val cooldowns = System.currentTimeMillis() - time[sender]!!
-                if (cooldowns >= Config.getCooldowns() * 1000) {
+                val coolDowns = System.currentTimeMillis() - time[sender]!!
+                if (coolDowns >= Config.getCoolDowns() * 1000) {
                     resetMine(name, sender)
                 } else {
-                    sender.sendMessage("you should wait ${Config.getCooldowns() * 1000 - cooldowns} s to reset!")
+                    sender.sendMessage("you should wait ${Config.getCoolDowns() * 1000 - coolDowns} s to reset!")
                 }
             } else resetMine(name, sender)
         } else sender.sendMessage("$name not exists!")
@@ -62,7 +67,8 @@ class PlotCommand : CommandExecutor {
     }
 
     private fun resetMine(mineName: String, sender: Player) {
-        MineConfig.getMineNameMap()[mineName]!!.reset(sender.location.chunk)
+        val chunk = sender.location.chunk
+        MineArea(chunk.x, chunk.z, sender.world).resetMineArea(MineConfig.getMineNameMap()[mineName])
         time[sender] = System.currentTimeMillis()
     }
 }

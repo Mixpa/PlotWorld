@@ -1,0 +1,4 @@
+help-message:
+  - '------FactionPlotWorld------'
+  - '/plot mines'
+  - '/plot reset <mine>'
