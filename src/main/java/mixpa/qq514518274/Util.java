@@ -1,6 +1,6 @@
-package Mixpa.qq514518274;
+package mixpa.qq514518274;
 
-import Mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.config.Config;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -31,10 +31,11 @@ public class Util {
         return isRoad(block.getChunk());
     }
 
-    public static boolean isWorld(World world){
+    public static boolean isWorld(World world) {
         return world.getGenerator() instanceof WorldGenerator;
     }
-    public static boolean isWorld(Player player){
+
+    public static boolean isWorld(Player player) {
         return isWorld(player.getWorld());
     }
 }

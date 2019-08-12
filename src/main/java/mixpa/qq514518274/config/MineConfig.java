@@ -1,18 +1,19 @@
-package Mixpa.qq514518274.config;
+package mixpa.qq514518274.config;
 
-import Mixpa.qq514518274.chunkdate.Mine;
+import mixpa.qq514518274.chunkdate.Mine;
 import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MineConfig {
     @Getter
     private static LinkedHashMap<Mine, Integer> mineComposition;
-
+    private static HashMap<String, Mine> mineNameMap;
     public static void loadMineConfig(Plugin plugin) {
         File minesDes = new File(plugin.getDataFolder(), "mines");
         if (!minesDes.exists()) {
@@ -32,6 +33,7 @@ public class MineConfig {
         if (fileArr == null) return;
         if (Config.getMineComposition() == null) return;
         mineComposition = new LinkedHashMap<>();
+        mineNameMap = new HashMap<>();
         for (Map.Entry<String, Integer> entry : Config.getMineComposition().entrySet()) {
             boolean hasFile = false;
             for (File file : fileArr) {
@@ -39,7 +41,9 @@ public class MineConfig {
                     hasFile = true;
                     if (file.isFile()) {
                         YamlConfiguration yaml = YamlConfiguration.loadConfiguration(new File(minesDes, entry.getKey()+".yml"));
-                        mineComposition.put(((Mine) yaml.get("Mine")), entry.getValue());
+                        Mine mine = (Mine) yaml.get("Mine");
+                        mineComposition.put(mine, entry.getValue());
+                        mineNameMap.put(mine.getName(), mine);
                     }
                 }
             }
@@ -47,4 +51,7 @@ public class MineConfig {
         }
     }
 
+    public static HashMap<String, Mine> getMineNameMap() {
+        return mineNameMap;
+    }
 }

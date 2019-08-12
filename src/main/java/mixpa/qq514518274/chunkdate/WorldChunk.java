@@ -1,4 +1,4 @@
-package Mixpa.qq514518274.chunkdate;
+package mixpa.qq514518274.chunkdate;
 
 import org.bukkit.generator.ChunkGenerator;
 

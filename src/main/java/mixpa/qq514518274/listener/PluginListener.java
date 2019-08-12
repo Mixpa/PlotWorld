@@ -1,4 +1,4 @@
-package Mixpa.qq514518274.listener;
+package mixpa.qq514518274.listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

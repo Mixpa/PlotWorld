@@ -1,7 +1,7 @@
-package Mixpa.qq514518274.listener;
+package mixpa.qq514518274.listener;
 
-import Mixpa.qq514518274.Util;
-import Mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.Util;
+import mixpa.qq514518274.config.Config;
 import net.redstoneore.legacyfactions.event.EventFactionsLandChange;
 import net.redstoneore.legacyfactions.locality.Locality;
 import org.bukkit.event.EventHandler;

@@ -1,9 +1,9 @@
-package Mixpa.qq514518274;
+package mixpa.qq514518274;
 
-import Mixpa.qq514518274.chunkdate.Mine;
-import Mixpa.qq514518274.chunkdate.Road;
-import Mixpa.qq514518274.config.MineConfig;
-import Mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.chunkdate.Mine;
+import mixpa.qq514518274.chunkdate.Road;
+import mixpa.qq514518274.config.MineConfig;
+import mixpa.qq514518274.config.Config;
 import org.bukkit.World;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;

@@ -1,6 +1,7 @@
-package Mixpa.qq514518274.chunkdate;
+package mixpa.qq514518274.chunkdate;
 
-import Mixpa.qq514518274.config.Config;
+import lombok.Getter;
+import mixpa.qq514518274.config.Config;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -10,9 +11,9 @@ import org.bukkit.generator.ChunkGenerator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class Mine implements ConfigurationSerializable, WorldChunk {
+    @Getter
     private String name;
     private LinkedHashMap<Material, Integer> blockComposition;
 
@@ -37,6 +38,16 @@ public class Mine implements ConfigurationSerializable, WorldChunk {
         }
         //基岩
         chunkData.setRegion(0, 0, 0, 16, 1, 16, Material.BEDROCK);
+        resetMine(chunkData);
+
+        return chunkData;
+    }
+    public void reset(Chunk chunk){
+        resetMine(chunk);
+    }
+    private void resetMine(Object object) {
+        if (!(object instanceof Chunk || object instanceof ChunkGenerator.ChunkData))
+            throw new IllegalArgumentException("type must be Chunk or ChunkDate!");
         Random random = new Random();
         int randomInt;
         for (int x = 0; x < 16; x++) {
@@ -45,29 +56,11 @@ public class Mine implements ConfigurationSerializable, WorldChunk {
                     randomInt = random.nextInt(99);
                     for (Map.Entry<Material, Integer> entry : blockComposition.entrySet()) {
                         if (entry.getValue() > randomInt) {
-                            chunkData.setBlock(x, y, z, entry.getKey());
+                            if (object instanceof Chunk)
+                                ((Chunk) object).getBlock(x, y, z).setType(entry.getKey());
+                            if (object instanceof ChunkGenerator.ChunkData)
+                                ((ChunkGenerator.ChunkData) object).setBlock(x, y, z, entry.getKey());
                             break;
-                        }
-                    }
-                }
-            }
-        }
-
-        return chunkData;
-    }
-
-    //todo
-    @SuppressWarnings("unused")
-    public void setChunk(Chunk chunk) {
-        ConcurrentHashMap<Material, Integer> map = new ConcurrentHashMap<>(blockComposition);
-        Random random = new Random();
-        for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                for (int y = 1; y < Config.getWorldHeight() + 1; y++) {
-                    for (Map.Entry<Material, Integer> entry : map.entrySet()) {
-                        if (entry.getValue() > random.nextInt(99)) {
-                            if (chunk.getBlock(x, y, z).isEmpty())
-                                chunk.getBlock(x, y, z).setType(entry.getKey());
                         }
                     }
                 }
