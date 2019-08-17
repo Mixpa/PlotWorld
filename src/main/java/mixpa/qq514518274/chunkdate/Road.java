@@ -5,8 +5,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.generator.ChunkGenerator;
 
-public class Road implements WorldChunk {
-    public ChunkGenerator.ChunkData getChunkDate(ChunkGenerator.ChunkData chunkData, ChunkGenerator.BiomeGrid biome) {
+public class Road{
+    public static ChunkGenerator.ChunkData getChunkDate(ChunkGenerator.ChunkData chunkData, ChunkGenerator.BiomeGrid biome) {
         //基岩
         chunkData.setRegion(0, 0, 0, 16, 1, 16, Material.BEDROCK);
         //石头

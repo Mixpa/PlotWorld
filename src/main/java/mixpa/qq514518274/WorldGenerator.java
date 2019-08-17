@@ -26,8 +26,8 @@ public class WorldGenerator extends ChunkGenerator {
         ChunkData chunkData = createChunkData(world);
         //如果是道路
         if (Util.isRoad(x, z))
-            return new Road().getChunkDate(chunkData, biome);
-        if (Config.getMineComposition().size() == 0)
+            return Road.getChunkDate(chunkData, biome);
+        if (Config.getPlotConfig().size() == 0)
             throw new IllegalArgumentException("插件的mine占比出现问题！请检查config中的plotConfig！");
         int randomInt = random.nextInt(99);
         for (Map.Entry<Mine, Integer> entry : MineConfig.getMineComposition().entrySet()) {

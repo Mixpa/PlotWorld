@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Mine implements ConfigurationSerializable, WorldChunk {
+public class Mine implements ConfigurationSerializable{
     @Getter
     private String name;
     private LinkedHashMap<Material, Integer> blockComposition;
@@ -20,7 +20,7 @@ public class Mine implements ConfigurationSerializable, WorldChunk {
     public Mine(Map<String, Object> map) {
         name = (String) map.get("name");
         blockComposition = new LinkedHashMap<>();
-        @SuppressWarnings("unchecked") Map<String, Object> blockList = (Map<String, Object>) map.get("blockComposition");
+        @SuppressWarnings("unchecked") Map<String, Object> blockList = (Map) map.get("blockComposition");
         int chance = 0;
         for (Map.Entry<String, Object> entry : blockList.entrySet()) {
             int value = (int) entry.getValue();
@@ -43,7 +43,7 @@ public class Mine implements ConfigurationSerializable, WorldChunk {
         return chunkData;
     }
 
-    public void reset(Chunk chunk) {
+    void reset(Chunk chunk) {
         resetMine(chunk);
     }
 

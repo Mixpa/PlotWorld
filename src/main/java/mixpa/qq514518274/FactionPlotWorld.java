@@ -1,25 +1,36 @@
 package mixpa.qq514518274;
 
-import mixpa.qq514518274.chunkdate.Mine;
 import mixpa.qq514518274.command.PlotCommand;
+import mixpa.qq514518274.chunkdate.Mine;
 import mixpa.qq514518274.config.Config;
 import mixpa.qq514518274.config.MineConfig;
 import mixpa.qq514518274.listener.PluginListener;
 import mixpa.qq514518274.listener.RoadListener;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.plugin.PluginLoadOrder;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.annotation.command.Command;
+import org.bukkit.plugin.java.annotation.command.Commands;
+import org.bukkit.plugin.java.annotation.dependency.SoftDependency;
+import org.bukkit.plugin.java.annotation.plugin.Description;
+import org.bukkit.plugin.java.annotation.plugin.LoadOrder;
+import org.bukkit.plugin.java.annotation.plugin.Plugin;
+import org.bukkit.plugin.java.annotation.plugin.author.Author;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * {@code FactionPlotWorld} 插件的主类
  *
  * @author Mixpa
  */
-
-@SuppressWarnings("unused")
+@Plugin(name = "FactionPlotWorld", version = "1.1.0")
+@Author("Mixpa")
+@LoadOrder(PluginLoadOrder.STARTUP)
+@Description("A Plot Faction world generator.")
+@SoftDependency("LegacyFactions")
+@Commands(@Command(name = "plot", aliases = "p", desc = "插件的主命令"))
 public class FactionPlotWorld extends JavaPlugin {
     @Override
     public void onEnable() {
@@ -29,8 +40,8 @@ public class FactionPlotWorld extends JavaPlugin {
         if (!config.exists())
             saveResource("config.yml", false);
         try {
-            new Config(this);
-        } catch (IOException e) {
+            new Config(config);
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
         //load Mine's config
@@ -39,7 +50,7 @@ public class FactionPlotWorld extends JavaPlugin {
         MineConfig.loadMineConfig(this);
         //init Util
         //初始化Util工具类
-        new Util();
+        Util.init();
         //register Event's
         //监听类加载
         getServer().getPluginManager().registerEvents(new RoadListener(), this);

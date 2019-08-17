@@ -1,0 +1,69 @@
+package mixpa.qq514518274.command;
+
+import com.google.common.collect.Maps;
+import mixpa.qq514518274.Util;
+import mixpa.qq514518274.chunkdate.Mine;
+import mixpa.qq514518274.chunkdate.MineArea;
+import mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.config.MineConfig;
+import org.bukkit.Chunk;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.HashMap;
+
+public class PlotCommand implements CommandExecutor {
+    private volatile HashMap<Player, Long> time = Maps.newHashMap();
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (sender instanceof Player) {
+            if (args.length == 0) {
+                plotHelp();
+                return true;
+            }
+            switch (args[0]) {
+                case "help": {
+                    plotHelp();
+                }
+                case "reset": {
+                    if (args.length == 2) {
+                        plotReset((Player) sender, args[1]);
+                    } else {
+                        System.out.println("test");
+                    }
+                }
+                default:
+                    plotHelp();
+            }
+        } else sender.sendMessage("you must be a player!");
+        return true;
+    }
+
+    private void plotHelp() {
+
+    }
+
+    private void plotReset(Player player, String mineName) {
+        Chunk chunk = player.getLocation().getChunk();
+        if (Util.isRoad(chunk)) {
+            player.sendMessage("can't reset in plot!");
+        } else if (MineConfig.getMineNameMap().containsKey(mineName)) {
+            Mine mine = MineConfig.getMineNameMap().get(mineName);
+            if (player.isOp()) {
+                new MineArea(chunk).resetMineArea(mine);
+            } else if (time.containsKey(player)) {
+                long coolDowns = System.currentTimeMillis() - time.get(player) - Config.getCoolDowns() * 1000;
+                if (coolDowns >= 0) {
+                    new MineArea(chunk).resetMineArea(mine);
+                    time.put(player, System.currentTimeMillis());
+                } else player.sendMessage("你必须等候" + coolDowns / 1000 + "秒才能reset plot地区哦");
+            } else {
+                new MineArea(chunk).resetMineArea(mine);
+                time.put(player, System.currentTimeMillis());
+            }
+        } else player.sendMessage(mineName + " not exists!");
+    }
+}

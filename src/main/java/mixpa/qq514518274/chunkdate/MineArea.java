@@ -25,6 +25,10 @@ public class MineArea {
         this.world = world;
     }
 
+    public MineArea(Chunk chunk) {
+        new MineArea(chunk.getX(), chunk.getZ(), chunk.getWorld());
+    }
+
     private List<Chunk> getMineChunks() {
         ArrayList<Chunk> chunks = new ArrayList<>();
         for (int chunkX = 1; chunkX <= Config.getPlotLength(); chunkX++) {

@@ -10,7 +10,7 @@ public class Util {
     private static int roadLength = 1;
     private static int addLength = 3;
 
-    Util() {
+    static void init(){
         roadLength = Config.getRoadLength();
         addLength = Config.getPlotLength() + Config.getRoadLength();
     }

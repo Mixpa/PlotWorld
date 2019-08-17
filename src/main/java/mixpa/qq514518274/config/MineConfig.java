@@ -31,10 +31,10 @@ public class MineConfig {
         }
         File[] fileArr = minesDes.listFiles();
         if (fileArr == null) return;
-        if (Config.getMineComposition() == null) return;
+        if (Config.getPlotConfig() == null) return;
         mineComposition = new LinkedHashMap<>();
         mineNameMap = new HashMap<>();
-        for (Map.Entry<String, Integer> entry : Config.getMineComposition().entrySet()) {
+        for (Map.Entry<String, Integer> entry : Config.getPlotConfig().entrySet()) {
             boolean hasFile = false;
             for (File file : fileArr) {
                 if (file.getName().equals(entry.getKey() + ".yml")) {
