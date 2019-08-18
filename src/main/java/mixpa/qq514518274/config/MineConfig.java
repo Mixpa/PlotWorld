@@ -1,11 +1,11 @@
 package mixpa.qq514518274.config;
 
-import mixpa.qq514518274.chunkdate.Mine;
 import lombok.Getter;
+import mixpa.qq514518274.chunkdate.Mine;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
-import java.io.*;
+import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,7 +13,9 @@ import java.util.Map;
 public class MineConfig {
     @Getter
     private static LinkedHashMap<Mine, Integer> mineComposition;
+    @Getter
     private static HashMap<String, Mine> mineNameMap;
+
     public static void loadMineConfig(Plugin plugin) {
         File minesDes = new File(plugin.getDataFolder(), "mines");
         if (!minesDes.exists()) {
@@ -40,7 +42,7 @@ public class MineConfig {
                 if (file.getName().equals(entry.getKey() + ".yml")) {
                     hasFile = true;
                     if (file.isFile()) {
-                        YamlConfiguration yaml = YamlConfiguration.loadConfiguration(new File(minesDes, entry.getKey()+".yml"));
+                        YamlConfiguration yaml = YamlConfiguration.loadConfiguration(new File(minesDes, entry.getKey() + ".yml"));
                         Mine mine = (Mine) yaml.get("Mine");
                         mineComposition.put(mine, entry.getValue());
                         mineNameMap.put(mine.getName(), mine);
@@ -49,9 +51,5 @@ public class MineConfig {
             }
             if (!hasFile) throw new IllegalArgumentException("mines文件夹里面必须含有和conifg配置中对应的mine配置文件！");
         }
-    }
-
-    public static HashMap<String, Mine> getMineNameMap() {
-        return mineNameMap;
     }
 }

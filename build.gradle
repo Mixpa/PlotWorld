@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.41'
 }
 
 group 'Mixpa.qq514518274'
@@ -26,16 +25,9 @@ dependencies {
     compileOnly fileTree(dir: 'libs', include: ['*.jar'])
     compileOnly 'org.projectlombok:lombok:1.18.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     annotationProcessor "org.spigotmc:plugin-annotations:1.2.2-SNAPSHOT"
     compileOnly "org.spigotmc:plugin-annotations:1.2.2-SNAPSHOT"
 }
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
-}
-compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
 }

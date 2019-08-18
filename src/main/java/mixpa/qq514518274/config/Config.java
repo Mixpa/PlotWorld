@@ -4,7 +4,7 @@ import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.*;
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,25 +16,16 @@ public class Config {
     private static int plotLength = 2;
     @Getter
     private static int worldHeight = 64;
-
-    public static int getCoolDowns() {
-        return coolDowns;
-    }
-
-    @SuppressWarnings("FieldCanBeLocal")
+    @Getter
     private static int coolDowns = 0;
     @Getter
     private static String cantBuildInRoad = ChatColor.translateAlternateColorCodes('&', "&a[服务器]&7这里是道路哦！");
     @Getter
     private static String cantClaimInRoad = ChatColor.translateAlternateColorCodes('&', "&a[服务器]&7禁止占领含有道路的区块哦！");
-
-    public static LinkedHashMap<String, Integer> getPlotConfig() {
-        return plotConfig;
-    }
-
+    @Getter
     private static LinkedHashMap<String, Integer> plotConfig;
 
-    public Config(final File file) throws IllegalAccessException{
+    public Config(final File file) throws IllegalAccessException {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
         for (Field field : Config.class.getDeclaredFields()) {
             String name = field.getName();
@@ -53,7 +44,7 @@ public class Config {
             } else throw new IllegalArgumentException("config.yml文件中的" + name + "配置不存在，请添加并配置它！");
         }
     }
-    public static int getAddLength(){
-        return roadLength+plotLength;
+    public static int getAddLength() {
+        return roadLength + plotLength;
     }
 }

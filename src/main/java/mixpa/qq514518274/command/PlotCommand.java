@@ -32,13 +32,14 @@ public class PlotCommand implements CommandExecutor {
                     if (args.length == 2) {
                         plotReset((Player) sender, args[1]);
                     } else {
-                        System.out.println("test");
+                        //I don't why that can't go to this code
+                        sender.sendMessage("如果你看到了这句话,请立刻加QQ：514518274提交插件bug");
                     }
                 }
                 default:
                     plotHelp();
             }
-        } else sender.sendMessage("you must be a player!");
+        } else sender.sendMessage("你必须是一个玩家哦！");
         return true;
     }
 
