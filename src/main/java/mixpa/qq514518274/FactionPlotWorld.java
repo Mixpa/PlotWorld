@@ -3,6 +3,7 @@ package mixpa.qq514518274;
 import mixpa.qq514518274.command.PlotCommand;
 import mixpa.qq514518274.chunkdate.Mine;
 import mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.config.Message;
 import mixpa.qq514518274.config.MineConfig;
 import mixpa.qq514518274.listener.PluginListener;
 import mixpa.qq514518274.listener.RoadListener;
@@ -34,13 +35,17 @@ import java.io.File;
 public class FactionPlotWorld extends JavaPlugin {
     @Override
     public void onEnable() {
-        //load config.yml
-        //config.yml的加载
+        //load config.yml message.yml
+        //config.yml message.yml 的加载
         File config = new File(getDataFolder(), "config.yml");
+        File message = new File(getDataFolder(), "message.yml");
         if (!config.exists())
             saveResource("config.yml", false);
+        if (!message.exists())
+            saveResource("message.yml", false);
         try {
             new Config(config);
+            new Message(message);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }

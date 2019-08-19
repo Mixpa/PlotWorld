@@ -49,7 +49,7 @@ public class MineConfig {
                     }
                 }
             }
-            if (!hasFile) throw new IllegalArgumentException("mines文件夹里面必须含有和conifg配置中对应的mine配置文件！");
+            if (!hasFile) throw new IllegalArgumentException("mines文件夹里面必须含有和config配置中对应的mine配置文件！");
         }
     }
 }

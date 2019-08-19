@@ -1,7 +1,7 @@
 package mixpa.qq514518274.listener;
 
 import mixpa.qq514518274.Util;
-import mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.config.Message;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.Cancellable;
@@ -17,7 +17,6 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class RoadListener implements Listener {
-    private static final String CANT_BUILD_IN_ROAD = Config.getCantBuildInRoad();
 
     private static void whenExplode(Event event) {
         //所有被爆炸破坏的方块存放在blockList
@@ -53,7 +52,7 @@ public class RoadListener implements Listener {
         if (!Util.isWorld(event.getBlock().getWorld()))
             return;
         if (Util.isRoad(event.getBlockPlaced().getChunk())) {
-            event.getPlayer().sendMessage(CANT_BUILD_IN_ROAD);
+            event.getPlayer().sendMessage(Message.getCantBuildInRoad());
             event.setCancelled(true);
         }
     }
@@ -80,7 +79,7 @@ public class RoadListener implements Listener {
             return;
         if (Util.isRoad(event.getBlock())) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(CANT_BUILD_IN_ROAD);
+            event.getPlayer().sendMessage(Message.getCantBuildInRoad());
         }
     }
 

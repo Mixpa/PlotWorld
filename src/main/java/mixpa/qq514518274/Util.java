@@ -7,8 +7,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class Util {
-    private static int roadLength = 1;
-    private static int addLength = 3;
+    private static int roadLength;
+    private static int addLength;
 
     static void init(){
         roadLength = Config.getRoadLength();

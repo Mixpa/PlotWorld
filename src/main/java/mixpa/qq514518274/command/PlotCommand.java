@@ -5,6 +5,7 @@ import mixpa.qq514518274.Util;
 import mixpa.qq514518274.chunkdate.Mine;
 import mixpa.qq514518274.chunkdate.MineArea;
 import mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.config.Message;
 import mixpa.qq514518274.config.MineConfig;
 import org.bukkit.Chunk;
 import org.bukkit.command.Command;
@@ -19,38 +20,37 @@ public class PlotCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (args.length == 0) {
+            plotHelp(sender);
+            return true;
+        }
         if (sender instanceof Player) {
-            if (args.length == 0) {
-                plotHelp();
-                return true;
-            }
             switch (args[0]) {
                 case "help": {
-                    plotHelp();
+                    plotHelp(sender);
                 }
                 case "reset": {
                     if (args.length == 2) {
                         plotReset((Player) sender, args[1]);
                     } else {
-                        //I don't why that can't go to this code
-                        sender.sendMessage("如果你看到了这句话,请立刻加QQ：514518274提交插件bug");
+                        sender.sendMessage(Message.getResetUsage());
                     }
                 }
                 default:
-                    plotHelp();
+                    plotHelp(sender);
             }
-        } else sender.sendMessage("你必须是一个玩家哦！");
+        } else sender.sendMessage(Message.getMustBeAPlayer());
         return true;
     }
 
-    private void plotHelp() {
-
+    private void plotHelp(CommandSender sender) {
+        sender.sendMessage(Message.getHelpMessage().toArray(new String[0]));
     }
 
     private void plotReset(Player player, String mineName) {
         Chunk chunk = player.getLocation().getChunk();
         if (Util.isRoad(chunk)) {
-            player.sendMessage("can't reset in plot!");
+            player.sendMessage(Message.getCantResetInRoad());
         } else if (MineConfig.getMineNameMap().containsKey(mineName)) {
             Mine mine = MineConfig.getMineNameMap().get(mineName);
             if (player.isOp()) {
@@ -60,11 +60,11 @@ public class PlotCommand implements CommandExecutor {
                 if (coolDowns >= 0) {
                     new MineArea(chunk).resetMineArea(mine);
                     time.put(player, System.currentTimeMillis());
-                } else player.sendMessage("你必须等候" + coolDowns / 1000 + "秒才能reset plot地区哦");
+                } else player.sendMessage(Message.getWaitCoolDowns(coolDowns / 1000));
             } else {
                 new MineArea(chunk).resetMineArea(mine);
                 time.put(player, System.currentTimeMillis());
             }
-        } else player.sendMessage(mineName + " not exists!");
+        } else player.sendMessage(Message.getNoMine(mineName));
     }
 }

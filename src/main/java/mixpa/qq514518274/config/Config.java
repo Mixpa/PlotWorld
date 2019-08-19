@@ -19,10 +19,6 @@ public class Config {
     @Getter
     private static int coolDowns = 0;
     @Getter
-    private static String cantBuildInRoad = ChatColor.translateAlternateColorCodes('&', "&a[服务器]&7这里是道路哦！");
-    @Getter
-    private static String cantClaimInRoad = ChatColor.translateAlternateColorCodes('&', "&a[服务器]&7禁止占领含有道路的区块哦！");
-    @Getter
     private static LinkedHashMap<String, Integer> plotConfig;
 
     public Config(final File file) throws IllegalAccessException {

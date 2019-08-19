@@ -47,8 +47,8 @@ public class Mine implements ConfigurationSerializable{
         resetMine(chunk);
     }
 
-    private void resetMine(Object object) {
-        if (!(object instanceof Chunk || object instanceof ChunkGenerator.ChunkData))
+    private <A> void resetMine(A chunkDef) {
+        if (!(chunkDef instanceof Chunk || chunkDef instanceof ChunkGenerator.ChunkData))
             throw new IllegalArgumentException("type must be Chunk or ChunkDate!");
         Random random = new Random();
         int randomInt;
@@ -58,10 +58,10 @@ public class Mine implements ConfigurationSerializable{
                     randomInt = random.nextInt(99);
                     for (Map.Entry<Material, Integer> entry : blockComposition.entrySet()) {
                         if (entry.getValue() > randomInt) {
-                            if (object instanceof Chunk)
-                                ((Chunk) object).getBlock(x, y, z).setType(entry.getKey());
-                            if (object instanceof ChunkGenerator.ChunkData)
-                                ((ChunkGenerator.ChunkData) object).setBlock(x, y, z, entry.getKey());
+                            if (chunkDef instanceof Chunk)
+                                ((Chunk) chunkDef).getBlock(x, y, z).setType(entry.getKey());
+                            if (chunkDef instanceof ChunkGenerator.ChunkData)
+                                ((ChunkGenerator.ChunkData) chunkDef).setBlock(x, y, z, entry.getKey());
                             break;
                         }
                     }
