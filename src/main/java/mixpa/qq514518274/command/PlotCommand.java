@@ -28,6 +28,7 @@ public class PlotCommand implements CommandExecutor {
             switch (args[0]) {
                 case "help": {
                     plotHelp(sender);
+                    break;
                 }
                 case "reset": {
                     if (args.length == 2) {
@@ -35,9 +36,19 @@ public class PlotCommand implements CommandExecutor {
                     } else {
                         sender.sendMessage(Message.getResetUsage());
                     }
+                    break;
+                }
+                case "mines": {
+                    sender.sendMessage("---------------");
+                    for (String name : MineConfig.getMineNameMap().keySet()) {
+                        sender.sendMessage(name);
+                    }
+                    sender.sendMessage("---------------");
+                    break;
                 }
                 default:
                     plotHelp(sender);
+                    break;
             }
         } else sender.sendMessage(Message.getMustBeAPlayer());
         return true;
@@ -54,15 +65,15 @@ public class PlotCommand implements CommandExecutor {
         } else if (MineConfig.getMineNameMap().containsKey(mineName)) {
             Mine mine = MineConfig.getMineNameMap().get(mineName);
             if (player.isOp()) {
-                new MineArea(chunk).resetMineArea(mine);
+                new MineArea(chunk.getX(),chunk.getZ(),player.getWorld()).resetMineArea(mine);
             } else if (time.containsKey(player)) {
                 long coolDowns = System.currentTimeMillis() - time.get(player) - Config.getCoolDowns() * 1000;
                 if (coolDowns >= 0) {
                     new MineArea(chunk).resetMineArea(mine);
                     time.put(player, System.currentTimeMillis());
-                } else player.sendMessage(Message.getWaitCoolDowns(coolDowns / 1000));
+                } else player.sendMessage(Message.getWaitCoolDowns(-coolDowns / 1000));
             } else {
-                new MineArea(chunk).resetMineArea(mine);
+                new MineArea(chunk.getX(), chunk.getZ(),player.getWorld()).resetMineArea(mine);
                 time.put(player, System.currentTimeMillis());
             }
         } else player.sendMessage(Message.getNoMine(mineName));

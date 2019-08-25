@@ -29,6 +29,7 @@ public class Message {
     private static String waitCoolDowns;
     @Getter
     private static List<String> helpMessage;
+
     public Message(final File file) throws IllegalAccessException {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
         for (Field field : Message.class.getDeclaredFields()) {
@@ -50,9 +51,10 @@ public class Message {
     }
 
     public static String getNoMine(String mineName) {
-        return noMine.replace("\\{mine}", mineName);
+        return noMine.replaceAll("\\{mine}", mineName);
     }
-    public static String getWaitCoolDowns(Long coolDowns){
+
+    public static String getWaitCoolDowns(Long coolDowns) {
         return waitCoolDowns.replaceAll("\\{cool_downs}", coolDowns.toString());
     }
 

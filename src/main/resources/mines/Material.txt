@@ -1,4 +1,5 @@
-﻿ACACIA_DOOR
+﻿//警告！！！！不要使用不是方块的物品 不过 AIR 水等液体 算方块哦
+ACACIA_DOOR
 金合欢木门
 ACACIA_DOOR_ITEM
 金合欢木门

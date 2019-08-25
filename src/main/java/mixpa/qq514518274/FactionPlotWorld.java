@@ -1,7 +1,7 @@
 package mixpa.qq514518274;
 
-import mixpa.qq514518274.command.PlotCommand;
 import mixpa.qq514518274.chunkdate.Mine;
+import mixpa.qq514518274.command.PlotCommand;
 import mixpa.qq514518274.config.Config;
 import mixpa.qq514518274.config.Message;
 import mixpa.qq514518274.config.MineConfig;
@@ -18,6 +18,7 @@ import org.bukkit.plugin.java.annotation.plugin.Description;
 import org.bukkit.plugin.java.annotation.plugin.LoadOrder;
 import org.bukkit.plugin.java.annotation.plugin.Plugin;
 import org.bukkit.plugin.java.annotation.plugin.author.Author;
+import org.bukkit.plugin.java.annotation.plugin.author.Authors;
 
 import java.io.File;
 
@@ -26,8 +27,8 @@ import java.io.File;
  *
  * @author Mixpa
  */
-@Plugin(name = "FactionPlotWorld", version = "1.1.0")
-@Author("Mixpa")
+@Plugin(name = "FactionPlotWorld", version = "1.2.0")
+@Authors(@Author("Mixpa"))
 @LoadOrder(PluginLoadOrder.STARTUP)
 @Description("A Plot Faction world generator.")
 @SoftDependency("LegacyFactions")
@@ -59,7 +60,7 @@ public class FactionPlotWorld extends JavaPlugin {
         //register Event's
         //监听类加载
         getServer().getPluginManager().registerEvents(new RoadListener(), this);
-        whenLegacyFactionsEnable();
+        getServer().getPluginManager().registerEvents(new PluginListener(this), this);
         //register Commands
         //注册命令
         getCommand("plot").setExecutor(new PlotCommand());
@@ -68,9 +69,5 @@ public class FactionPlotWorld extends JavaPlugin {
     @Override
     public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
         return new WorldGenerator();
-    }
-
-    private void whenLegacyFactionsEnable() {
-        getServer().getPluginManager().registerEvents(new PluginListener(this), this);
     }
 }
