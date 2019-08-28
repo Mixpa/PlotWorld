@@ -4,7 +4,7 @@ import com.google.common.collect.Maps;
 import mixpa.qq514518274.Util;
 import mixpa.qq514518274.chunkdate.Mine;
 import mixpa.qq514518274.chunkdate.MineArea;
-import mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.config.PlotConfig;
 import mixpa.qq514518274.config.Message;
 import mixpa.qq514518274.config.MineConfig;
 import org.bukkit.Chunk;
@@ -31,7 +31,7 @@ public class PlotResetCommand implements CommandExecutor {
                 if (player.isOp()) {
                     new MineArea(chunk.getX(), chunk.getZ(), player.getWorld()).resetMineArea(mine);
                 } else if (time.containsKey(player)) {
-                    long coolDowns = System.currentTimeMillis() - time.get(player) - Config.getCoolDowns() * 1000;
+                    long coolDowns = System.currentTimeMillis() - time.get(player) - PlotConfig.getCoolDowns() * 1000;
                     if (coolDowns >= 0) {
                         new MineArea(chunk).resetMineArea(mine);
                         time.put(player, System.currentTimeMillis());

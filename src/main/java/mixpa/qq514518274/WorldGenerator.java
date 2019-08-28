@@ -2,7 +2,7 @@ package mixpa.qq514518274;
 
 import mixpa.qq514518274.chunkdate.Mine;
 import mixpa.qq514518274.chunkdate.Road;
-import mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.config.PlotConfig;
 import mixpa.qq514518274.config.MineConfig;
 import org.bukkit.World;
 import org.bukkit.generator.BlockPopulator;
@@ -27,7 +27,7 @@ public class WorldGenerator extends ChunkGenerator {
         //如果是道路
         if (Util.isRoad(x, z))
             return Road.getChunkDate(chunkData, biome);
-        if (Config.getPlotConfig().size() == 0)
+        if (PlotConfig.getPlotConfig().size() == 0)
             throw new IllegalArgumentException("插件的mine占比出现问题！请检查config中的plotConfig！");
         int randomInt = random.nextInt(99);
         for (Map.Entry<Mine, Integer> entry : MineConfig.getMineComposition().entrySet()) {

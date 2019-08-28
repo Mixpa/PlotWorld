@@ -2,7 +2,7 @@ package mixpa.qq514518274;
 
 import mixpa.qq514518274.chunkdate.Mine;
 import mixpa.qq514518274.command.PlotCommandManage;
-import mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.config.PlotConfig;
 import mixpa.qq514518274.config.Message;
 import mixpa.qq514518274.config.MineConfig;
 import mixpa.qq514518274.listener.PluginListener;
@@ -22,6 +22,7 @@ import org.bukkit.plugin.java.annotation.plugin.author.Author;
 import org.bukkit.plugin.java.annotation.plugin.author.Authors;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * {@code FactionPlotWorld} 插件的主类
@@ -46,9 +47,9 @@ public class PlotWorld extends JavaPlugin {
         if (!message.exists())
             saveResource("message.yml", false);
         try {
-            new Config(config);
+            new PlotConfig(config);
             new Message(message);
-        } catch (IllegalAccessException e) {
+        } catch (IllegalAccessException | FileNotFoundException e) {
             e.printStackTrace();
         }
         //load Mine's config

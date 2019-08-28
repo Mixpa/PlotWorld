@@ -1,7 +1,7 @@
 package mixpa.qq514518274.chunkdate;
 
 import lombok.Getter;
-import mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.config.PlotConfig;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -54,7 +54,7 @@ public class Mine implements ConfigurationSerializable{
         int randomInt;
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                for (int y = 1; y < Config.getWorldHeight() + 1; y++) {
+                for (int y = 1; y < PlotConfig.getWorldHeight() + 1; y++) {
                     randomInt = random.nextInt(99);
                     for (Map.Entry<Material, Integer> entry : blockComposition.entrySet()) {
                         if (entry.getValue() > randomInt) {

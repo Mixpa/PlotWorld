@@ -1,6 +1,6 @@
 package mixpa.qq514518274;
 
-import mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.config.PlotConfig;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -11,8 +11,8 @@ public class Util {
     private static int addLength;
 
     static void init(){
-        roadLength = Config.getRoadLength();
-        addLength = Config.getPlotLength() + Config.getRoadLength();
+        roadLength = PlotConfig.getRoadLength();
+        addLength = PlotConfig.getPlotLength() + PlotConfig.getRoadLength();
     }
 
     public static boolean isRoad(int chunkX, int chunkZ) {

@@ -4,11 +4,12 @@ import mixpa.qq514518274.config.Message;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 
 public class TestMessage {
     @Test
-    public void testMessage() throws IllegalAccessException {
+    public void testMessage() throws IllegalAccessException, FileNotFoundException {
         new Message(new File("D:\\Users\\Mixpa\\IdeaProjects\\FactionPlotWorld\\src\\main\\resources\\message.yml"));
         for (String var:Message.getHelpMessage()){
             System.out.println(var);
@@ -18,7 +19,7 @@ public class TestMessage {
         System.out.println(Message.getCantClaimInRoad());
     }
     @Test
-    public void test() throws IllegalAccessException {
+    public void test() throws IllegalAccessException, FileNotFoundException {
         new Message(new File("D:\\Users\\Mixpa\\IdeaProjects\\FactionPlotWorld\\src\\main\\resources\\message.yml"));
 
         for (Field field:Message.class.getDeclaredFields()){
@@ -28,7 +29,7 @@ public class TestMessage {
         }
     }
     @Test
-    public void testNoMine() throws IllegalAccessException {
+    public void testNoMine() throws IllegalAccessException, FileNotFoundException {
         new Message(new File("D:\\Users\\Mixpa\\IdeaProjects\\FactionPlotWorld\\src\\main\\resources\\message.yml"));
         System.out.println(Message.getNoMine().replaceAll("\\{mine}", "hahahah"));
     }

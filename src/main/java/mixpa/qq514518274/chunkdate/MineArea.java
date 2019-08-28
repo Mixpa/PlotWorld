@@ -2,7 +2,7 @@ package mixpa.qq514518274.chunkdate;
 
 import lombok.Getter;
 import mixpa.qq514518274.Util;
-import mixpa.qq514518274.config.Config;
+import mixpa.qq514518274.config.PlotConfig;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 
@@ -20,8 +20,8 @@ public class MineArea {
     public MineArea(int chunkX, int chunkZ, World world) {
         if (Util.isRoad(chunkX, chunkZ))
             throw new IllegalArgumentException("can not in Road!");
-        this.X = chunkX / Config.getAddLength();
-        this.Z = chunkZ / Config.getAddLength();
+        this.X = chunkX / PlotConfig.getAddLength();
+        this.Z = chunkZ / PlotConfig.getAddLength();
         this.world = world;
     }
 
@@ -31,8 +31,8 @@ public class MineArea {
 
     private List<Chunk> getMineChunks() {
         ArrayList<Chunk> chunks = new ArrayList<>();
-        for (int chunkX = 1; chunkX <= Config.getPlotLength(); chunkX++) {
-            for (int chunkZ = 1; chunkZ <= Config.getPlotLength(); chunkZ++) {
+        for (int chunkX = 1; chunkX <= PlotConfig.getPlotLength(); chunkX++) {
+            for (int chunkZ = 1; chunkZ <= PlotConfig.getPlotLength(); chunkZ++) {
                 chunks.add(world.getChunkAt(getChunkXorZ(this.X, chunkX), getChunkXorZ(this.Z, chunkZ)));
             }
         }
@@ -40,8 +40,8 @@ public class MineArea {
     }
 
     private int getChunkXorZ(int xOrZ, int chunkXorZ) {
-        if (xOrZ < 0) return xOrZ * Config.getAddLength() - Config.getRoadLength() + 1 - chunkXorZ;
-        else return xOrZ * Config.getAddLength() + Config.getRoadLength() - 1 + chunkXorZ;
+        if (xOrZ < 0) return xOrZ * PlotConfig.getAddLength() - PlotConfig.getRoadLength() + 1 - chunkXorZ;
+        else return xOrZ * PlotConfig.getAddLength() + PlotConfig.getRoadLength() - 1 + chunkXorZ;
     }
 
     public void resetMineArea(Mine mine) {

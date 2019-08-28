@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,9 @@ public class Message {
     @Getter
     private static List<String> helpMessage;
 
-    public Message(final File file) throws IllegalAccessException {
+    public Message(final File file) throws IllegalAccessException, FileNotFoundException {
+        if (!file.exists())
+            throw new FileNotFoundException("file is not find!");
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
         for (Field field : Message.class.getDeclaredFields()) {
             field.setAccessible(true);
