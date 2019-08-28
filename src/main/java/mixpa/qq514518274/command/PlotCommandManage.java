@@ -18,6 +18,7 @@ public class PlotCommandManage implements TabExecutor {
     private static final CommandExecutor RESET = new PlotResetCommand();
     private static final CommandExecutor MINES = new PlotMinesCommand();
     private static List<String> commandList;
+    //this map's key is lower case
     private static Map<String, List<String>> aloneCommand;
     public PlotCommandManage(){
         commandList = new ArrayList<>();
