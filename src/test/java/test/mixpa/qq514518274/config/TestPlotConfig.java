@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Field;
 
 public class TestPlotConfig {
     @Test
@@ -15,6 +14,6 @@ public class TestPlotConfig {
         System.out.println(System.currentTimeMillis()-start);
     }
     @Test
-    public void testImp() throws FileNotFoundException, IllegalAccessException {
+    public void testImp() {
     }
 }
