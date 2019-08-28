@@ -8,7 +8,7 @@ import java.io.File;
 public class TestConfig {
     @Test
     public void testConfig() throws IllegalAccessException {
-        Config config = new Config(new File("D:\\Users\\Mixpa\\IdeaProjects\\FactionPlotWorld\\src\\main\\resources\\config.yml"));
+        new Config(new File("out/production/resources/config.yml"));
         System.out.println(Config.getPlotConfig().toString());
     }
 }

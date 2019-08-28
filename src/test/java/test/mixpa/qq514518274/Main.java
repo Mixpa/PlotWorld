@@ -10,6 +10,5 @@ public class Main {
 
     @Test
     public void test() {
-        System.out.println(this.getClass().getClassLoader().getResource("test.yml"));
     }
 }
