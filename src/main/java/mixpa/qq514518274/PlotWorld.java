@@ -2,6 +2,7 @@ package mixpa.qq514518274;
 
 import mixpa.qq514518274.chunkdate.Mine;
 import mixpa.qq514518274.command.PlotCommand;
+import mixpa.qq514518274.command.TabPlotCommand;
 import mixpa.qq514518274.config.Config;
 import mixpa.qq514518274.config.Message;
 import mixpa.qq514518274.config.MineConfig;
@@ -27,13 +28,13 @@ import java.io.File;
  *
  * @author Mixpa
  */
-@Plugin(name = "FactionPlotWorld", version = "1.2.0")
+@Plugin(name = "PlotWorld", version = "1.2.0")
 @Authors(@Author("Mixpa"))
 @LoadOrder(PluginLoadOrder.STARTUP)
 @Description("A Plot Faction world generator.")
 @SoftDependency("LegacyFactions")
 @Commands(@Command(name = "plot", aliases = "p", desc = "插件的主命令"))
-public class FactionPlotWorld extends JavaPlugin {
+public class PlotWorld extends JavaPlugin {
     @Override
     public void onEnable() {
         //load config.yml message.yml
@@ -64,6 +65,7 @@ public class FactionPlotWorld extends JavaPlugin {
         //register Commands
         //注册命令
         getCommand("plot").setExecutor(new PlotCommand());
+        getCommand("plot").setTabCompleter(new TabPlotCommand());
     }
 
     @Override

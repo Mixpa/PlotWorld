@@ -1,4 +1,4 @@
-# FactionPlotWorld
+# PlotWorld
 ## 使用这个插件可以创造出一个类似与地皮世界的世界 
 ## a bukkit plugin can create world with plot and road.
 ### 如果你想都要自定义生成区块 可以去修改config.yml和mines里的文件 

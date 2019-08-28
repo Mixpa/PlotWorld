@@ -8,7 +8,7 @@ import org.bukkit.command.TabCompleter;
 import java.util.List;
 
 public class TabPlotCommand implements TabCompleter {
-    private static List<String> commands = Lists.newArrayList("help", "reset", "mines");
+    private static final List<String> commands = Lists.newArrayList("help", "reset", "mines");
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (args.length==0)
