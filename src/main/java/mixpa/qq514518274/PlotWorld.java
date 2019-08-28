@@ -1,13 +1,13 @@
 package mixpa.qq514518274;
 
 import mixpa.qq514518274.chunkdate.Mine;
-import mixpa.qq514518274.command.PlotCommand;
-import mixpa.qq514518274.command.TabPlotCommand;
+import mixpa.qq514518274.command.PlotCommandManage;
 import mixpa.qq514518274.config.Config;
 import mixpa.qq514518274.config.Message;
 import mixpa.qq514518274.config.MineConfig;
 import mixpa.qq514518274.listener.PluginListener;
 import mixpa.qq514518274.listener.RoadListener;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.PluginLoadOrder;
@@ -28,10 +28,10 @@ import java.io.File;
  *
  * @author Mixpa
  */
-@Plugin(name = "PlotWorld", version = "1.2.0")
+@Plugin(name = "PlotWorld", version = "1.3.0")
 @Authors(@Author("Mixpa"))
 @LoadOrder(PluginLoadOrder.STARTUP)
-@Description("A Plot Faction world generator.")
+@Description("A Plot world generator.")
 @SoftDependency("LegacyFactions")
 @Commands(@Command(name = "plot", aliases = "p", desc = "插件的主命令"))
 public class PlotWorld extends JavaPlugin {
@@ -64,8 +64,9 @@ public class PlotWorld extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PluginListener(this), this);
         //register Commands
         //注册命令
-        getCommand("plot").setExecutor(new PlotCommand());
-        getCommand("plot").setTabCompleter(new TabPlotCommand());
+        TabExecutor te = new PlotCommandManage();
+        getCommand("plot").setExecutor(te);
+        getCommand("plot").setTabCompleter(te);
     }
 
     @Override

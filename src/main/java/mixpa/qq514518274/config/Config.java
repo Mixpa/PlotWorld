@@ -1,7 +1,6 @@
 package mixpa.qq514518274.config;
 
 import lombok.Getter;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -34,8 +33,6 @@ public class Config {
                     }
                     continue;
                 }
-                if (field.getType() == String.class)
-                    field.set(null, ChatColor.translateAlternateColorCodes('&', config.getString(name)));
                 field.set(null, config.get(name));
             } else throw new IllegalArgumentException("config.yml文件中的" + name + "配置不存在，请添加并配置它！");
         }
