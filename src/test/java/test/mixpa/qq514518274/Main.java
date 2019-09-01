@@ -10,5 +10,6 @@ public class Main {
 
     @Test
     public void test() {
+        System.out.println(String.format("test", "what"));
     }
 }

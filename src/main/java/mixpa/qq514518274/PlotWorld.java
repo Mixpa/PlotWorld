@@ -15,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.annotation.command.Command;
 import org.bukkit.plugin.java.annotation.command.Commands;
 import org.bukkit.plugin.java.annotation.dependency.SoftDependency;
+import org.bukkit.plugin.java.annotation.dependency.SoftDependsOn;
 import org.bukkit.plugin.java.annotation.plugin.Description;
 import org.bukkit.plugin.java.annotation.plugin.LoadOrder;
 import org.bukkit.plugin.java.annotation.plugin.Plugin;
@@ -33,7 +34,7 @@ import java.io.FileNotFoundException;
 @Authors(@Author("Mixpa"))
 @LoadOrder(PluginLoadOrder.STARTUP)
 @Description("A Plot world generator.")
-@SoftDependency("LegacyFactions")
+@SoftDependsOn(value = {@SoftDependency("LegacyFactions"), @SoftDependency("Vault")})
 @Commands(@Command(name = "plot", aliases = "p", desc = "插件的主命令"))
 public class PlotWorld extends JavaPlugin {
     @Override

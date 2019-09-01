@@ -1,0 +1,10 @@
+#道路区块的生物群落
+biome: 'VOID'
+#道路区块最底层的方块
+lowest: 'BEDROCK'
+#道路区块中间部分的方块
+body: 'STONE'
+#道路区块的地板
+floor: 'SMOOTH_BRICK'
+#
+frame: 'WOOD_STEP'

@@ -14,6 +14,7 @@ public class TestPlotConfig {
         System.out.println(System.currentTimeMillis()-start);
     }
     @Test
-    public void testImp() {
+    public void testImp() throws FileNotFoundException, IllegalAccessException {
+        new PlotConfig(null);
     }
 }

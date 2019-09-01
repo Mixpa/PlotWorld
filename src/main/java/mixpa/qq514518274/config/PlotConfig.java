@@ -1,11 +1,11 @@
 package mixpa.qq514518274.config;
 
 import lombok.Getter;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Field;
+import java.io.Reader;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -22,14 +22,18 @@ public class PlotConfig extends Config {
     private static LinkedHashMap<String, Integer> plotConfig;
 
     public PlotConfig(final File file) throws IllegalAccessException, FileNotFoundException {
-        load(file, PlotConfig.class, (field, name, cs)->{
+        load(file, PlotConfig.class, (field, name, cs) -> {
             if (name.equals("plotConfig")) {
                 plotConfig = new LinkedHashMap<>();
                 for (Map.Entry<String, Object> entry : cs.getConfigurationSection("plotConfig").getValues(false).entrySet()) {
                     plotConfig.put(entry.getKey(), (Integer) entry.getValue());
                 }
-            }else field.set(null, cs.get(name));
+            } else field.set(null, cs.get(name));
         });
+    }
+    public void load(Reader reader){
+        Yaml yaml = new Yaml().load(reader);
+
     }
 
     public static int getAddLength() {

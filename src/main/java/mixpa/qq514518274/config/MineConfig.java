@@ -23,7 +23,7 @@ public class MineConfig {
                 throw new RuntimeException("无法生成Mine文件夹！");
             }
             plugin.saveResource("mines/default.yml", false);
-            plugin.saveResource("mines/Material.txt", true);
+            plugin.saveResource("mines/1.12.2Material.txt", true);
         } else if (!minesDes.isDirectory()) {
             if (!minesDes.delete()) {
                 throw new RuntimeException("插件的文件夹中存在一个叫做Mines的文件，且无法删除！");
