@@ -3,12 +3,14 @@ package mixpa.qq514518274.config;
 import lombok.Getter;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.lang.reflect.Field;
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-public class RoadConfig {
+public class RoadConfig implements ConfigLoader {
     @Getter
     private static String biome;
     @Getter
@@ -20,19 +22,17 @@ public class RoadConfig {
     @Getter
     private static String frame;
 
-    public RoadConfig(Reader reader) throws IllegalAccessException {
+    @Override
+    public void load(File file) throws FileNotFoundException, IllegalAccessException {
+        load(new FileReader(file));
+    }
+
+    @Override
+    public void load(Reader reader) throws IllegalAccessException {
         Map<String, Object> map = new Yaml().load(reader);
         for (Field field : this.getClass().getDeclaredFields()) {
             field.setAccessible(true);
             field.set(null, map.get(field.getName()));
         }
-    }
-
-    public RoadConfig(File file) throws FileNotFoundException, IllegalAccessException {
-        this(new FileReader(file));
-    }
-
-    public RoadConfig(InputStream is) throws IllegalAccessException {
-        this(new InputStreamReader(is, StandardCharsets.UTF_8));
     }
 }

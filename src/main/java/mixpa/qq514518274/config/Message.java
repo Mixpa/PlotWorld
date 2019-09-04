@@ -25,12 +25,13 @@ public class Message {
     @Getter
     private static String noMine;
     @Getter
+    private static String noMoney;
+    @Getter
     private static String mustBeAPlayer;
     @Getter
     private static String waitCoolDowns;
     @Getter
     private static List<String> helpMessage;
-
     public Message(final File file) throws IllegalAccessException, FileNotFoundException {
         if (!file.exists())
             throw new FileNotFoundException("file is not find!");
@@ -51,6 +52,10 @@ public class Message {
             field.set(null, transString((String) field.get(null)));
         }
         helpMessage = transString(helpMessage);
+    }
+
+    public static String getNoMoney(Double money) {
+        return noMoney.replaceAll("\\{money}", money.toString());
     }
 
     public static String getNoMine(String mineName) {

@@ -10,5 +10,3 @@ plotConfig:
   default: 100
 #reset指令的冷却时间 单位是秒
 coolDowns: 3600
-#reset指令需要花费的金钱
-resetMoney: 100.0

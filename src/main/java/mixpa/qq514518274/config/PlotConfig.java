@@ -5,11 +5,13 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.Reader;
+import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class PlotConfig extends Config {
+public class PlotConfig implements ConfigLoader {
     @Getter
     private static int roadLength = 1;
     @Getter
@@ -19,24 +21,25 @@ public class PlotConfig extends Config {
     @Getter
     private static int coolDowns = 0;
     @Getter
+    private static Double resetMoney = 100d;
+    @Getter
     private static LinkedHashMap<String, Integer> plotConfig;
-
-    public PlotConfig(final File file) throws IllegalAccessException, FileNotFoundException {
-        load(file, PlotConfig.class, (field, name, cs) -> {
-            if (name.equals("plotConfig")) {
-                plotConfig = new LinkedHashMap<>();
-                for (Map.Entry<String, Object> entry : cs.getConfigurationSection("plotConfig").getValues(false).entrySet()) {
-                    plotConfig.put(entry.getKey(), (Integer) entry.getValue());
-                }
-            } else field.set(null, cs.get(name));
-        });
-    }
-    public void load(Reader reader){
-        Yaml yaml = new Yaml().load(reader);
-
-    }
 
     public static int getAddLength() {
         return roadLength + plotLength;
+    }
+
+    @Override
+    public void load(File file) throws FileNotFoundException, IllegalAccessException {
+        load(new FileReader(file));
+    }
+
+    @Override
+    public void load(Reader reader) throws IllegalAccessException {
+        Map<String, Object> map = new Yaml().load(reader);
+        for (Field field : PlotConfig.class.getDeclaredFields()) {
+            field.setAccessible(true);
+            field.set(null, map.get(field.getName()));
+        }
     }
 }

@@ -2,19 +2,28 @@ package test.mixpa.qq514518274.config;
 
 import mixpa.qq514518274.config.PlotConfig;
 import org.junit.Test;
+import sun.nio.cs.ext.PCK;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
 public class TestPlotConfig {
+    final File FILE = new File("out/production/resources/config.yml");
+
     @Test
     public void testConfig() throws IllegalAccessException, FileNotFoundException {
         long start = System.currentTimeMillis();
-        new PlotConfig(new File("out/production/resources/config.yml"));
-        System.out.println(System.currentTimeMillis()-start);
+        System.out.println(System.currentTimeMillis() - start);
     }
+
     @Test
     public void testImp() throws FileNotFoundException, IllegalAccessException {
-        new PlotConfig(null);
+        new PlotConfig().load(FILE);
+        System.out.println(PlotConfig.getResetMoney());
+    }
+
+    @Test
+    public void testDemo() throws FileNotFoundException, IllegalAccessException {
+        System.out.println(PlotConfig.getPlotConfig());
     }
 }
