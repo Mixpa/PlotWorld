@@ -20,7 +20,8 @@ public class PlotCommandManage implements TabExecutor {
     private static List<String> commandList;
     //this map's key is lower case
     private static Map<String, List<String>> aloneCommand;
-    public PlotCommandManage(){
+
+    public PlotCommandManage() {
         commandList = new ArrayList<>();
         aloneCommand = new HashMap<>();
         for (Field field : PlotCommandManage.class.getDeclaredFields()) {
@@ -35,6 +36,7 @@ public class PlotCommandManage implements TabExecutor {
             aloneCommand.put(name, alone);
         }
     }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
@@ -52,16 +54,16 @@ public class PlotCommandManage implements TabExecutor {
                     return MINES.onCommand(sender, command, label, args);
                 }
                 default:
-                    HELP.onCommand(sender, command, label, args);
-                    break;
+                    return HELP.onCommand(sender, command, label, args);
             }
         } else sender.sendMessage(Message.getMustBeAPlayer());
         return true;
     }
+
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (args.length ==1){
-            if (args[0].equals("")){
+        if (args.length == 1) {
+            if (args[0].equals("")) {
                 return commandList;
             }
             for (Map.Entry<String, List<String>> entry : aloneCommand.entrySet()) {

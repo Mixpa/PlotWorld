@@ -14,6 +14,7 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.PluginLoadOrder;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,6 +22,7 @@ import org.bukkit.plugin.java.annotation.command.Command;
 import org.bukkit.plugin.java.annotation.command.Commands;
 import org.bukkit.plugin.java.annotation.dependency.SoftDependency;
 import org.bukkit.plugin.java.annotation.dependency.SoftDependsOn;
+import org.bukkit.plugin.java.annotation.permission.Permissions;
 import org.bukkit.plugin.java.annotation.plugin.Description;
 import org.bukkit.plugin.java.annotation.plugin.LoadOrder;
 import org.bukkit.plugin.java.annotation.plugin.Plugin;
@@ -41,6 +43,7 @@ import java.io.FileNotFoundException;
 @Description("A Plot world generator.")
 @SoftDependsOn(value = {@SoftDependency("LegacyFactions"), @SoftDependency("Vault")})
 @Commands(@Command(name = "plot", aliases = "p", desc = "插件的主命令"))
+@Permissions(value = @org.bukkit.plugin.java.annotation.permission.Permission(name = "PlotWorld.reset", defaultValue = PermissionDefault.FALSE))
 public class PlotWorld extends JavaPlugin {
     @Getter
     private static Economy econ = null;
@@ -73,6 +76,7 @@ public class PlotWorld extends JavaPlugin {
         TabExecutor te = new PlotCommandManage();
         getCommand("plot").setExecutor(te);
         getCommand("plot").setTabCompleter(te);
+
     }
 
     @Override

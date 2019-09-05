@@ -39,7 +39,10 @@ public class PlotConfig implements ConfigLoader {
         Map<String, Object> map = new Yaml().load(reader);
         for (Field field : PlotConfig.class.getDeclaredFields()) {
             field.setAccessible(true);
-            field.set(null, map.get(field.getName()));
+            Object obj = map.get(field.getName());
+            if (obj == null)
+                throw new NullPointerException("config.yml中的"+field.getName()+"不存在！！！！");
+            field.set(null, obj);
         }
     }
 }

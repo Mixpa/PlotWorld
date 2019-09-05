@@ -32,7 +32,10 @@ public class RoadConfig implements ConfigLoader {
         Map<String, Object> map = new Yaml().load(reader);
         for (Field field : this.getClass().getDeclaredFields()) {
             field.setAccessible(true);
-            field.set(null, map.get(field.getName()));
+            Object obj = map.get(field.getName());
+            if (obj == null)
+                throw new NullPointerException("road.yml中的"+field.getName()+"不存在！");
+            field.set(null, obj);
         }
     }
 }

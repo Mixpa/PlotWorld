@@ -41,7 +41,7 @@ public class Message {
             String name = field.getName();
             if (config.contains(name)) {
                 field.set(null, config.get(name));
-            } else throw new IllegalAccessException("配置文件message.yml中的" + name + "配置不存在！");
+            } else throw new NullPointerException("配置文件message.yml中的" + name + "配置不存在！");
         }
         for (Field field : Message.class.getDeclaredFields()) {
             field.setAccessible(true);

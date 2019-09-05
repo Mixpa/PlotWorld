@@ -9,6 +9,7 @@ import mixpa.qq514518274.config.Message;
 import mixpa.qq514518274.config.MineConfig;
 import mixpa.qq514518274.config.PlotConfig;
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Chunk;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 public class PlotResetCommand implements CommandExecutor {
     private volatile HashMap<Player, Long> time = Maps.newHashMap();
     private static Economy econ = PlotWorld.getEcon();
+    private static Permission perms = PlotWorld.getPerms();
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 2) {
@@ -35,6 +37,8 @@ public class PlotResetCommand implements CommandExecutor {
                 }else if(!econ.has(player, PlotConfig.getResetMoney())){
                     sender.sendMessage(Message.getNoMoney(PlotConfig.getResetMoney()));
                     return true;
+                }else if (!perms.has(player, "PlotWorld.reset")){//检测是否有权限
+                    sender.sendMessage("you dont have permission to reset!");
                 }else if (time.containsKey(player)) {//如果不是OP
                     long coolDowns = System.currentTimeMillis() - time.get(player) - PlotConfig.getCoolDowns() * 1000;
                     if (coolDowns >= 0) {

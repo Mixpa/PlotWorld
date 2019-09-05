@@ -20,15 +20,15 @@ public class MineConfig {
         File minesDes = new File(plugin.getDataFolder(), "mines");
         if (!minesDes.exists()) {
             if (!minesDes.mkdirs()) {
-                throw new RuntimeException("无法生成Mine文件夹！");
+                throw new NullPointerException("无法生成Mine文件夹！");
             }
             plugin.saveResource("mines/default.yml", false);
             plugin.saveResource("mines/1.12.2Material.txt", true);
         } else if (!minesDes.isDirectory()) {
             if (!minesDes.delete()) {
-                throw new RuntimeException("插件的文件夹中存在一个叫做Mines的文件，且无法删除！");
+                throw new NullPointerException("插件的文件夹中存在一个叫做Mines的文件，且无法删除！");
             } else if (minesDes.mkdirs()) {
-                throw new RuntimeException("无法生成Mine文件夹！");
+                throw new NullPointerException("无法生成Mine文件夹！");
             }
         }
         File[] fileArr = minesDes.listFiles();
