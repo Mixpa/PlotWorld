@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
@@ -29,9 +28,18 @@ public class Message {
     @Getter
     private static String mustBeAPlayer;
     @Getter
-    private static String waitCoolDowns;
+    private static String waitCoolDowns = "&7你必须等候{cool_downs}才能reset plot地区哦";
     @Getter
     private static List<String> helpMessage;
+    @Getter
+    private static String second = "秒";
+    @Getter
+    private static String minute = "分";
+    @Getter
+    private static String hour = "小时";
+    @Getter
+    private static String day = "天";
+
     public Message(final File file) throws IllegalAccessException, FileNotFoundException {
         if (!file.exists())
             throw new FileNotFoundException("file is not find!");
@@ -45,9 +53,12 @@ public class Message {
         }
         for (Field field : Message.class.getDeclaredFields()) {
             field.setAccessible(true);
-            if (field.getName().equals("prefix"))
+            String name = field.getName();
+            if (name.equals("prefix"))
                 continue;
-            if (field.getName().equals("helpMessage"))
+            if (name.equals("helpMessage"))
+                continue;
+            if (name.equals("second")||name.equals("minute")||name.equals("hour")||name.equals("day"))
                 continue;
             field.set(null, transString((String) field.get(null)));
         }
@@ -62,8 +73,8 @@ public class Message {
         return noMine.replaceAll("\\{mine}", mineName);
     }
 
-    public static String getWaitCoolDowns(Long coolDowns) {
-        return waitCoolDowns.replaceAll("\\{cool_downs}", coolDowns.toString());
+    public static String getWaitCoolDowns(long coolDowns) {
+        return waitCoolDowns.replaceAll("\\{cool_downs}", coolDownsToString(coolDowns));
     }
 
     private List<String> transString(List<String> list) {
@@ -76,5 +87,22 @@ public class Message {
 
     private String transString(String var) {
         return ChatColor.translateAlternateColorCodes('&', prefix + var);
+    }
+
+    /**
+     * 将时间转换为天 小时 分 秒单位
+     * @param coolDowns 单位是秒的时间
+     * @return 转换的时间文本
+     */
+    private static String coolDownsToString(long coolDowns){
+        String time;
+        if (coolDowns < 60)
+            time = coolDowns + second;
+        else if (coolDowns < 60 * 60)
+            time = coolDowns / 60 + minute + coolDowns % 60 + second;
+        else if (coolDowns < 60 * 60 * 60)
+            time = coolDowns / (60 * 60) + hour + coolDownsToString(coolDowns % (60 * 60));
+        else time = coolDowns / (60 * 60 * 60) + day + coolDownsToString(coolDowns % (60 * 60 * 60));
+        return time;
     }
 }

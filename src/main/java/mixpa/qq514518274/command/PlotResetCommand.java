@@ -19,9 +19,10 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 
 public class PlotResetCommand implements CommandExecutor {
-    private volatile HashMap<Player, Long> time = Maps.newHashMap();
     private static Economy econ = PlotWorld.getEcon();
     private static Permission perms = PlotWorld.getPerms();
+    private volatile HashMap<Player, Long> time = Maps.newHashMap();
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 2) {
@@ -34,12 +35,12 @@ public class PlotResetCommand implements CommandExecutor {
                 Mine mine = MineConfig.getMineNameMap().get(mineName);
                 if (player.isOp()) {
                     new MineArea(chunk.getX(), chunk.getZ(), player.getWorld()).resetMineArea(mine);
-                }else if(!econ.has(player, PlotConfig.getResetMoney())){
+                } else if (!econ.has(player, PlotConfig.getResetMoney())) {
                     sender.sendMessage(Message.getNoMoney(PlotConfig.getResetMoney()));
                     return true;
-                }else if (!perms.has(player, "PlotWorld.reset")){//检测是否有权限
+                } else if (!perms.has(player, "PlotWorld.reset") && !perms.has(player, "PlotWorld.reset." + mineName)) {//检测是否有权限
                     sender.sendMessage("you dont have permission to reset!");
-                }else if (time.containsKey(player)) {//如果不是OP
+                } else if (time.containsKey(player)) {//如果不是OP
                     long coolDowns = System.currentTimeMillis() - time.get(player) - PlotConfig.getCoolDowns() * 1000;
                     if (coolDowns >= 0) {
                         econ.withdrawPlayer(player, PlotConfig.getResetMoney());

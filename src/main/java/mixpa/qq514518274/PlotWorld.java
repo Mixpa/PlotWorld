@@ -20,6 +20,8 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.annotation.command.Command;
 import org.bukkit.plugin.java.annotation.command.Commands;
+import org.bukkit.plugin.java.annotation.dependency.Dependency;
+import org.bukkit.plugin.java.annotation.dependency.DependsOn;
 import org.bukkit.plugin.java.annotation.dependency.SoftDependency;
 import org.bukkit.plugin.java.annotation.dependency.SoftDependsOn;
 import org.bukkit.plugin.java.annotation.permission.Permissions;
@@ -41,7 +43,8 @@ import java.io.FileNotFoundException;
 @Authors(@Author("Mixpa"))
 @LoadOrder(PluginLoadOrder.STARTUP)
 @Description("A Plot world generator.")
-@SoftDependsOn(value = {@SoftDependency("LegacyFactions"), @SoftDependency("Vault")})
+@DependsOn(@Dependency("Vault"))
+@SoftDependsOn(value = {@SoftDependency("LegacyFactions")})
 @Commands(@Command(name = "plot", aliases = "p", desc = "插件的主命令"))
 @Permissions(value = @org.bukkit.plugin.java.annotation.permission.Permission(name = "PlotWorld.reset", defaultValue = PermissionDefault.FALSE))
 public class PlotWorld extends JavaPlugin {

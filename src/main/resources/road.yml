@@ -1,3 +1,4 @@
+#再次配置文件可以设置关于PLot世界中关于道路的相关设置
 #道路区块的生物群落
 biome: 'VOID'
 #道路区块最底层的方块
@@ -6,5 +7,5 @@ lowest: 'BEDROCK'
 body: 'STONE'
 #道路区块的地板
 floor: 'SMOOTH_BRICK'
-#
+#边框的方块
 frame: 'WOOD_STEP'
